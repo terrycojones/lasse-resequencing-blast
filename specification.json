@@ -1,0 +1,34 @@
+{
+    "steps": [
+        {
+            "cwd": "00-start",
+            "name": "start",
+            "script": "start.sh"
+        },
+        {
+            "cwd": "01-split",
+            "dependencies": ["start"],
+            "name": "split",
+            "script": "sbatch.sh"
+        },
+        {
+            "cwd": "02-blastn",
+            "dependencies": ["split"],
+            "name": "blastn",
+            "script": "sbatch.sh"
+        },
+        {
+            "collect": true,
+            "cwd": "03-panel",
+            "dependencies": ["blastn"],
+            "name": "panel",
+            "script": "sbatch.sh"
+        },
+        {
+            "cwd": "04-stop",
+            "dependencies": ["panel"],
+            "name": "stop",
+            "script": "sbatch.sh"
+        }
+    ]
+}
